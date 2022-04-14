@@ -1,4 +1,5 @@
 import styles from "./AvailableMeals.module.css";
+import MealItem from "../MealItem/MealItem";
 import Card from "../../UI/Card/Card";
 const HARDCODE_MEALS = [
   {
@@ -31,7 +32,9 @@ const HARDCODE_MEALS = [
   },
 ];
 const AvailableMeals = () => {
-  const listOfMeals = HARDCODE_MEALS.map(meal => <li>{meal.name}</li>);
+  const listOfMeals = HARDCODE_MEALS.map(meal => (
+    <MealItem key={meal.id} {...meal} />
+  ));
 
   return (
     <section className={styles.meals}>
