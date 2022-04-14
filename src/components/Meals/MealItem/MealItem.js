@@ -4,6 +4,7 @@ import MealItemForm from "../MealItemForm/MealItemForm";
 const MealItem = props => {
   const { name, description, price, id } = props;
   const formatPrice = `$${Math.round(price * 100) / 100}`;
+
   return (
     <li className={styles.meal}>
       <div>
