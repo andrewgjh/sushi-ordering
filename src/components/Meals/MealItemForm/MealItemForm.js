@@ -2,12 +2,12 @@ import styles from "./MealItemForm.module.css";
 import Input from "../../UI/Input/Input";
 import { useRef } from "react";
 
-const MealItemForm = ({ id }) => {
+const MealItemForm = ({ id, onAddToCart }) => {
   const amountInputRef = useRef();
   const submitHandler = e => {
     e.preventDefault();
     const orderAmount = +amountInputRef.current.value;
-    console.log(typeof orderAmount);
+    onAddToCart(orderAmount);
   };
   const inputConfig = {
     id: `amount + ${id}`,
