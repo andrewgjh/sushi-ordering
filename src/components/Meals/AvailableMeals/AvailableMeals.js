@@ -30,6 +30,13 @@ const HARDCODE_MEALS = [
       "For those that want the freshest selection of fish available each day on a bed of sweet and savoury sushi rice.",
     price: 28.99,
   },
+  {
+    id: "w4",
+    name: "Sushi & Sashimi Boat",
+    description:
+      "This is the best party platter you can find in the market. Just order and become the best host in town.",
+    price: 88.29,
+  },
 ];
 const AvailableMeals = () => {
   const listOfMeals = HARDCODE_MEALS.map(meal => (
