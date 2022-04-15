@@ -6,10 +6,11 @@ export const CartContext = createContext();
 const cartReducer = (state, action) => {
   if (action.type === "ADD_ITEM") {
     const updateCartItems = [...state.items, action.item];
-    const updateTotalAmount =
-      state.totalAmount + action.item.price * action.item * action.item.amount;
-
-    return { items: updateCartItems, totalAmount: updateTotalAmount };
+    const itemTotal = action.item.price * action.item.amount;
+    return {
+      items: updateCartItems,
+      totalAmount: Math.round((state.totalAmount + itemTotal) * 100) / 100,
+    };
   }
   if (action.type === "REMOVE_ITEM") {
   }
