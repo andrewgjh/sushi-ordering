@@ -5,9 +5,13 @@ import { CartContext } from "../../providers/CartProvider";
 import CartItem from "./CartItem/CartItem";
 
 const Cart = ({ onClose }) => {
-  const { cart } = useContext(CartContext);
-  const addItemHandler = item => {};
-  const removeItemHandler = id => {};
+  const { cart, addItem, removeItem } = useContext(CartContext);
+  const addItemHandler = item => {
+    addItem({ ...item, amount: 1 });
+  };
+  const removeItemHandler = id => {
+    removeItem(id);
+  };
   const cartList = (
     <ul className={styles["cart-items"]}>
       {cart.items.map(item => (

@@ -5,14 +5,47 @@ export const CartContext = createContext();
 
 const cartReducer = (state, action) => {
   if (action.type === "ADD_ITEM") {
+    const totalAmount =
+      Math.round(
+        (state.totalAmount + action.item.price * action.item.amount) * 100
+      ) / 100;
+    const existingItemIndex = state.items.findIndex(
+      item => item.id === action.item.id
+    );
+    const existingItem = state.items[existingItemIndex];
+    if (existingItem) {
+      const updatedItemAmount = {
+        ...existingItem,
+        amount: existingItem.amount + action.item.amount,
+      };
+      let updatedCart = [...state.items];
+      updatedCart[existingItemIndex] = updatedItemAmount;
+      return { items: updatedCart, totalAmount };
+    }
     const updateCartItems = [...state.items, action.item];
-    const itemTotal = action.item.price * action.item.amount;
     return {
       items: updateCartItems,
-      totalAmount: Math.round((state.totalAmount + itemTotal) * 100) / 100,
+      totalAmount,
     };
   }
   if (action.type === "REMOVE_ITEM") {
+    const existingItemIndex = state.items.findIndex(
+      item => item.id === action.id
+    );
+    const existingItem = state.items[existingItemIndex];
+    const updatedAmount =
+      Math.round((state.totalAmount - existingItem.price) * 100) / 100;
+    if (existingItem.amount > 1) {
+      const updatedItem = { ...existingItem, amount: existingItem.amount - 1 };
+      let updatedCart = [...state.items];
+      updatedCart[existingItemIndex] = updatedItem;
+      return { items: updatedCart, totalAmount: updatedAmount };
+    } else {
+      return {
+        items: state.items.filter(item => item.id !== action.id),
+        totalAmount: updatedAmount,
+      };
+    }
   }
   return {
     items: [],
