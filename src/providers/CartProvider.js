@@ -47,6 +47,12 @@ const cartReducer = (state, action) => {
       };
     }
   }
+  if (action.type === "CLEAR_CART") {
+    return {
+      items: [],
+      totalAmount: 0,
+    };
+  }
   return {
     items: [],
     totalAmount: 0,
@@ -65,8 +71,11 @@ export const CartProvider = ({ children }) => {
   const removeItem = id => {
     dispatchCart({ type: "REMOVE_ITEM", id });
   };
+  const clearCart = () => {
+    dispatchCart({ type: "CLEAR_CART" });
+  };
 
-  const cartData = { cart, addItem, removeItem };
+  const cartData = { cart, addItem, removeItem, clearCart };
   return (
     <CartContext.Provider value={cartData}>{children}</CartContext.Provider>
   );

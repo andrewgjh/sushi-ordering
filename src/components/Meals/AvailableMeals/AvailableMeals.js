@@ -52,9 +52,9 @@ const AvailableMeals = () => {
       const response = await fetch(
         "https://react-http-4c46f-default-rtdb.firebaseio.com/Meals.json"
       );
-      if (!response.ok) {
-        throw new Error("Something went wrong!");
-      }
+      // if (!response.ok) {
+      //   throw new Error("Something went wrong!");
+      // }
       const data = await response.json();
       const meals = [];
       for (let key in data) {
